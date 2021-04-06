@@ -1,0 +1,17 @@
+﻿<!--Menu Partial View-->
+
+@model IEnumerable<MenuItem>
+
+<div class="navbar-nav">
+    @foreach (var item in Model)
+    {
+        @if (item.IsRazorPageOrControllerMethod)
+        {
+            <a class="nav-item nav-link @item.NameCSSActive" asp-area="@item.NameArea" asp-page="@item.NamePage">@item.Text</a>
+        }
+        else
+        {
+            <a class="nav-item nav-link @item.NameCSSActive" asp-controller="@item.NameController" asp-action="@item.Action">@item.Text</a>
+        }
+    }
+</div>

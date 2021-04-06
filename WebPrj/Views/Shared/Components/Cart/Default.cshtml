@@ -1,0 +1,38 @@
+﻿<!--Cart Partial View-->
+
+<html>
+
+<body>
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    <!-- Информация пользователя -->
+    <a asp-controller="Cart" asp-action="Index" class="navbar-text mlauto">
+        0.0 руб
+        <i class="fas fa-shopping-cart nav-color"></i>
+        (0)
+    </a>
+
+    <div class="dropdown ml-4 nav-color">
+
+        <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="images/User.png" width="30" alt="User" class="rounded" />
+        </div>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
+                <img src="images/User.png" width="50" alt="User" class="rounded" />
+                user@gmail.com
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-controller="Product" asp-action="UserProducts">My goods</a>
+            <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>
+        </div>
+
+    </div>
+    <!-- Информация пользователя - конец -->
+
+</body>
+
+</html>

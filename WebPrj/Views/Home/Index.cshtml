@@ -1,0 +1,77 @@
+﻿<!--HomeController View-->
+
+@{
+    ViewData["Title"] = "Главная страница";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Hello, World! Vadim.</h1>
+
+<h2>@ViewData["Text"]</h2>
+<h3>Список</h3>
+
+<!--LIST-->
+<ol type="A">
+    @for (int i=1; i <4; i++){
+        <li>Элемент @(i) списка</li>
+     }
+</ol>
+
+<hr />
+
+
+<h3>Форма</h3>
+
+<!--Форма отправки серверу логин/пароль и данных чек бокса, радиокнопки...-->
+<form method="post">
+
+    <!--CHECKBOX-->
+    <div id="divCB">
+        <div class="form-check" name="divcb1">
+            <input class="form-check-input" type="checkbox" name="cb1">
+            <label class="form-check-label" for="cb1">Чек-бокс 1</label>
+        </div>
+        <div class="form-check" name="divcb2">
+            <input class="form-check-input" type="checkbox" name="cb2">
+            <label class="form-check-label" for="cb2">Чек-бокс 2</label>
+        </div>
+    </div>
+    <br />
+
+    <!--RADIOBTTON-->
+    <div class="form-check form-check-inline" id="divRB">
+
+        <div class="form-check" id="rb1">
+            <input class="form-check-input" type="radio" name="rb">
+            <label class="form-check-label" for="rb">Радио-1</label>
+        </div>
+        <div class="form-check" id="rb2">
+            <input class="form-check-input" type="radio" name="rb">
+            <label class="form-check-label" for="rb">Радио-2</label>
+        </div>
+        <div class="form-check" id="rb3">
+            <input class="form-check-input" type="radio" name="rb">
+            <label class="form-check-label" for="rb">Радио-3</label>
+        </div>
+    </div><p />
+
+
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">Логин:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="login" placeholder="Введите имя">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Пароль:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" name="password" placeholder="Введите пароль">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+
+    <!--SELECTLIST-->
+    <p /><p />
+         <select asp-items="@ViewData["Lst"] as SelectList" name="sl"></select>
+</form>
