@@ -11,6 +11,9 @@ using WebPrj.Services;
 
 namespace WebPrj
 {
+    //класс Startup €вл€етс€ входной точкой в приложение ASP.NET CORE
+    //Ётот класс производит конфигурацию приложени€, настраивает сервисы, которые приложение будет использовать,
+    //устанавливает компоненты дл€ обработки запроса или middleware.
     public class Startup
     {
         public IConfiguration Configuration { get; }
@@ -21,17 +24,20 @@ namespace WebPrj
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        //метод ConfigureServices() регистрирует сервисы, которые используютс€ приложением.
+        //¬ качестве параметра он принимает объект IServiceCollection, который и представл€ет коллекцию сервисов в приложении.
+        //— помощью методов расширений этого объекта производитс€ конфигураци€ приложени€ дл€ использовани€ сервисов.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-
+           
             services.AddControllersWithViews();
+
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //lb4.ƒл€ возможности использовани€ ролей и дл€ простых паролей
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -42,9 +48,13 @@ namespace WebPrj
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = false;
                 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            //lb4. ƒл€ использовани€ Razor страниц
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //ћетод Configure устанавливает, как приложение будет обрабатывать запрос. Ётот метод €вл€етс€ об€зательным.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             // если приложение в процессе разработки

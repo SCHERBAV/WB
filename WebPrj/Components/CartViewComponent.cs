@@ -6,7 +6,6 @@ namespace WebPrj.Components
     {
         public IViewComponentResult Invoke()
         {
-
             return View();
         }
     }
