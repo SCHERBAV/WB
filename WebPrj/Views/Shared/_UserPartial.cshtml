@@ -6,6 +6,7 @@
 <!--lb4.-->
 @using Microsoft.AspNetCore.Identity;
 @using WebPrj.DAL.Entities;
+
 <!--Внедрение класса SignInManager<ApplicationUser>, для проверки регистрации пользователя-->
 @inject SignInManager<ApplicationUser> signInManager
 
@@ -13,13 +14,13 @@
 {
     @await Component.InvokeAsync("Cart")
     <div class="dropdown ml-4 nav-color">
-        <div class="dropdown-toggle" id="dropdownMenuButton" datatoggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @*<div class="dropdown-toggle" id="dropdownMenuButton" datatoggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="~/Images/avatar.jpg" width="30" alt="User" class="rounded" />
-        </div>
+        </div>*@
         <div class="dropdown-menu" arialabelledby="dropdownMenuButton">
             <div class="dropdown-item-text">
                 <img src="~/images/avatar.jpg" width="50" alt="User" class="rounded" />
-                @User.Identity.Name
+                @*@User.Identity.Name*@g
             </div>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" asp-controller="Product" asp-action="UserProducts">

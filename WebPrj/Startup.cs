@@ -29,8 +29,7 @@ namespace WebPrj
         //С помощью методов расширений этого объекта производится конфигурация приложения для использования сервисов.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))) ;
 
             services.AddDatabaseDeveloperPageExceptionFilter();
            
@@ -71,9 +70,9 @@ namespace WebPrj
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles();   //для использования статических файлов находящихся в папке wwwroot
 
-            // добавляем возможности маршрутизации
+            //добавляем возможности маршрутизации
             //Вызов app.UseRouting() добавляет некоторые возможности маршрутизации,
             //благодаря чему приложение может соотносить запросы с определенными маршрутами.
             app.UseRouting();
@@ -81,19 +80,17 @@ namespace WebPrj
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             DbInitializer.Seed(context, userManager, roleManager).GetAwaiter().GetResult();
 
-            // устанавливаем адреса, которые будут обрабатываться
+
+            //устанавливаем адреса, которые будут обрабатываться
             //Далее идет вызов app.UseEndpoints
             //(endpoints =>, который позволяет определить маршруты, которые будут обрабатываться приложением.
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });   
+                                {
+                                    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                                    endpoints.MapRazorPages();
+                                });   
         }
     }
 }

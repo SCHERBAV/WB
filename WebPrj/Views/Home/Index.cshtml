@@ -1,28 +1,33 @@
 ﻿<!--HomeController View-->
-
 @{
-    ViewData["Title"] = "Главная страница";
+
+    ViewData["Title"] = "Главная страница"; @*Заголовок страницы*@
+    @*Подключение макета, в который будет включаться данное представление*@
+    @*В макете же, место куда будет подставляться это представление необходимо написать как @RenderBody()*@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<h1>Hello, World! Vadim.</h1>
+@*<h1>Hello, World! Vadim.</h1>*@
+@*<p>@ViewData["test"]</p>*@    @*Пример работы с данными контроллер в представлении*@
 
-<h2>@ViewData["Text"]</h2>
+@*<h2>@ViewData["Text"]</h2>*@
+
+
+@*Вывод элементов списка в представлении, с помощью языка си шарп*@
 <h3>Список</h3>
-
 <!--LIST-->
 <ol type="A">
-    @for (int i=1; i <4; i++){
+    @for (int i = 1; i < 4; i++)
+    {
         <li>Элемент @(i) списка</li>
-     }
+    }
 </ol>
 
-<hr />
+<hr />  @*горизонтальная черта*@
 
 
 <h3>Форма</h3>
-
 <!--Форма отправки серверу логин/пароль и данных чек бокса, радиокнопки...-->
 <form method="post">
 
@@ -38,7 +43,7 @@
         </div>
     </div>
     <br />
-
+    
     <!--RADIOBTTON-->
     <div class="form-check form-check-inline" id="divRB">
 
@@ -56,22 +61,24 @@
         </div>
     </div><p />
 
-
+    <!--Поля ввода логина / пароля-->
     <div class="form-group row">
         <label for="inputEmail" class="col-sm-2 col-form-label">Логин:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-5">
             <input type="text" class="form-control" name="login" placeholder="Введите имя">
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-2 col-form-label">Пароль:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-5">
             <input type="password" class="form-control" name="password" placeholder="Введите пароль">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Отправить</button>
 
+    <!--Вывод списка элементов, сформированного в классе контроллера-->
     <!--SELECTLIST-->
-    <p /><p />
-         <select asp-items="@ViewData["Lst"] as SelectList" name="sl"></select>
+    <p/><div><select asp-items="@ViewData["Lst"] as SelectList" name="sl"></select></div>
+
+
 </form>

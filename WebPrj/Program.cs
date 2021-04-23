@@ -17,12 +17,11 @@ namespace WebPrj
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    //ћетод webBuilder.UseStartup<Startup>() устанавливает класс Startup в качестве стартового.
-                    //» при запуске приложени€ среда ASP.NET будет искать в сборке приложени€ класс с именем Startup и загружать его.
-                    webBuilder.UseStartup<Startup>();
-                });
+            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
+                            {
+                                //ћетод webBuilder.UseStartup<Startup>() устанавливает класс Startup в качестве стартового.
+                                //» при запуске приложени€ среда ASP.NET будет искать в сборке приложени€ класс с именем Startup и загружать его.
+                                webBuilder.UseStartup<Startup>();
+                            });
     }
 }

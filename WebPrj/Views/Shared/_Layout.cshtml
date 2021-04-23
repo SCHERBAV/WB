@@ -15,37 +15,43 @@
     <!--Подключение скриптов-->
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+    <!--Подключение стилей-->
     <style>
         /*#nb{
             height: 20px;
         }*/
     </style>
 
+    <!-- Заголовок - начало -->
     <header>
         <!--Контейнер-->
         <div class="container">
-                <!-- Панель навигации -->
-                
+            <!-- Панель навигации -->
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                        <!-- меню сайта -->
-                            <a class="navbar-brand" asp-action="Index" asp-controller="Home">903328_Щерба Вадим</a>
-                            <div class="navbar-nav">
-                                @await Component.InvokeAsync("Menu")
-                            </div>
-                        <!-- меню сайта - конец -->
-                        <!-- Информация пользователя -->
-                            <partial name="_UserPartial" />
-                        <!-- Информация пользователя - конец -->
+                <!-- меню сайта -->
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">903328_Щерба Вадим</a>
+                <div class="navbar-nav">
+                    @await Component.InvokeAsync("Menu")
+                </div>
+                <!-- меню сайта - конец -->
+                <!-- Информация пользователя -->
+                <partial name="_UserPartial" />
+                <!-- Информация пользователя - конец -->
             </nav>
-                
-                <!-- Панель навигации - конец -->
-            </div><!-- container - конец -->
-</header><!-- header - конец -->
+            <!-- Панель навигации - конец -->
+        </div>
+        <!-- Контейнер - конец -->
+    </header>
+    <!-- Заголовок - конец -->
 
     <!--Содержимое страницы-->
     <main class="container">
+        <!--подключение какой-либо другой разметки-->
+        <!--что позволяет, создать единообразный стиль приложения, для всех представлений-->
         @RenderBody()
     </main>
+    <!--Содержимое страницы - конец-->
 
     <!--Подвал страницы-->
     <footer class="fixed-bottom">

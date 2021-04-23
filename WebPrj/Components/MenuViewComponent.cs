@@ -23,10 +23,10 @@ namespace WebPrj.Components
             {
                 var EqualsController = controller?.Equals(item.NameController) ?? false; //название контроллера совпадает?
                 var EqualsArea = area?.Equals(item.NameArea) ?? false;  //название зоны совпадает?
-                if (EqualsArea || EqualsController)
-                    item.NameCSSActive = "active";
+                // Если есть совпадение, то сделать элемент меню активным (применить соответствующий класс CSS)
+                if (EqualsArea || EqualsController) item.NameCSSActive = "active";
             }
-            return View(listMenuItems);
+            return View(listMenuItems); //возвращаем результат в представление
         }
     }
 }

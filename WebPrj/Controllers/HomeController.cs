@@ -11,12 +11,14 @@ namespace WebPrj.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Text"] = "Лабораторная работа 4";
+            ViewData["Text"] = "Лабораторная работа 5"; 
             ViewData["Lst"] = new SelectList(listDemos, "ListItemValue", "ListItemText");
+            ViewData["test"] = "test string";
             return View();
         }
 
-        public HomeController(){
+        public HomeController()
+        {
             listDemos = new List<ListDemo>{
                 new ListDemo{ListItemValue=1, ListItemText="Item_1"},
                 new ListDemo{ListItemValue=2, ListItemText="Item_2"},
