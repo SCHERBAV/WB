@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using WebPrj.DAL.Entities;
 
+//lb5.
+using Microsoft.AspNetCore.Http;
+
 namespace WebPrj.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -61,6 +64,9 @@ namespace WebPrj.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            //lb5. 
+            public IFormFile Avatar { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -76,6 +82,15 @@ namespace WebPrj.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+
+                //lb5.
+                if (Input.Avatar != null) 
+                {
+                    user.AvatarImage = new byte[(int)Input.Avatar.Length];
+                    await Input.Avatar.OpenReadStream().ReadAsync(user.AvatarImage, 0, (int)Input.Avatar.Length);
+                }
+                //-------------
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
