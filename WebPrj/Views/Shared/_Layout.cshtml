@@ -25,19 +25,24 @@
 
     <!-- Заголовок - начало -->
     <header>
+
         <!--Контейнер-->
         <div class="container">
+
             <!-- Панель навигации -->
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
                 <!-- меню сайта -->
                 <a class="navbar-brand" asp-action="Index" asp-controller="Home">903328_Щерба Вадим</a>
                 <div class="navbar-nav">
                     @await Component.InvokeAsync("Menu")
                 </div>
                 <!-- меню сайта - конец -->
+
                 <!-- Информация пользователя -->
-                <partial name="_UserPartial" />
+                    <partial name="_UserPartial" />
                 <!-- Информация пользователя - конец -->
+
             </nav>
             <!-- Панель навигации - конец -->
         </div>
@@ -58,13 +63,13 @@
         <div class="navbar navbar-dark navbar-expand-md bg-dark" id="nb">
             <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" href="http://www.facebook.com">
-                    <i class="fab fa-facebook-f fa-2x"></i>
+                    <i class="fab fa-facebook-f fa-1x"></i>
                 </a>
                 <a class="nav-item nav-link" href="http://www.vk.com">
-                    <i class="fab fa-vk fa-2x"></i>
+                    <i class="fab fa-vk fa-1x"></i>
                 </a>
                 <a class="nav-item nav-link" href="http://www.twitter.com">
-                    <i class="fab fa-twitter fa-2x"></i>
+                    <i class="fab fa-twitter fa-1x"></i>
                 </a>
             </div>
         </div>

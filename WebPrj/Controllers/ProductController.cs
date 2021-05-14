@@ -3,21 +3,46 @@ using System.Collections.Generic;
 
 using WebPrj.DAL.Entities;
 
+//lb6.
+using System.Linq;
+
 namespace WebPrj.Controllers
 {
     public class ProductController : Controller
     {
-        List<Laptop> _laptops;  //список ноутбуков
+        //List<Laptop> _laptops;  //список ноутбуков
         List<Producer> _producers;  //список производителей
+
+        //lb6.
+        public List<Laptop> _laptops;  //список ноутбуков
+        
+
+        //lb6.
+        int _pageSize;  //количество объектов на странице
+
 
         public ProductController() 
         {
             InitData(); //инициализация списков
+
+            //lb6.
+            _pageSize = 3;
         }
 
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View(_laptops);
+        //}
+
+        //lb6.
+        public IActionResult Index(int pageNo = 1)
         {
-            return View(_laptops);
+            var items = _laptops.Skip((pageNo - 1) * _pageSize).Take(_pageSize).ToList();
+
+            //Skip - Обходит указанное количество элементов в последовательности, а затем возвращает оставшиеся элементы.
+            //Take - Возвращает указанное количество смежных элементов с начала последовательности.
+
+            return View(items);
         }
 
         //инициализация данных в списках
