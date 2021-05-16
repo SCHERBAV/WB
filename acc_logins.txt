@@ -1,0 +1,21 @@
+-without avatar
+
+	user@mail.ru
+	qwerty
+
+	admin@mail.ru
+	qwerty
+
+	qwerty@mail.ru
+	123456
+
+-with avatar
+	
+	qwer@mail.ru
+	qwer12
+
+	abcd@mail.ru
+	abcdef
+
+	vadim@mail.ru
+	vadim1
