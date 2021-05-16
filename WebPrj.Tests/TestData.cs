@@ -10,11 +10,11 @@ namespace WebPrj.Tests
         {
             return new List<Laptop>
                 {
-                    new Laptop{ LaptopId = 1 },
-                    new Laptop{ LaptopId = 2 },
-                    new Laptop{ LaptopId = 3 },
-                    new Laptop{ LaptopId = 4 },
-                    new Laptop{ LaptopId = 5 }
+                    new Laptop{ LaptopId = 1, ProducerId = 1 },
+                    new Laptop{ LaptopId = 2, ProducerId = 2 },
+                    new Laptop{ LaptopId = 3, ProducerId = 3 },
+                    new Laptop{ LaptopId = 4, ProducerId = 4 },
+                    new Laptop{ LaptopId = 5, ProducerId = 5 }
                 };
         }
 

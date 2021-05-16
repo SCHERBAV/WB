@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using WebPrj.Models;
 
 using WebPrj.DAL.Entities;
 
@@ -35,14 +36,24 @@ namespace WebPrj.Controllers
         //}
 
         //lb6.
-        public IActionResult Index(int pageNo = 1)
+        //public IActionResult Index(int pageNo = 1)
+        //lb6. 4.6.2
+        public IActionResult Index(int? group, int pageNo = 1)
         {
-            var items = _laptops.Skip((pageNo - 1) * _pageSize).Take(_pageSize).ToList();
-
             //Skip - Обходит указанное количество элементов в последовательности, а затем возвращает оставшиеся элементы.
             //Take - Возвращает указанное количество смежных элементов с начала последовательности.
 
-            return View(items);
+            //var items = _laptops.Skip((pageNo - 1) * _pageSize).Take(_pageSize).ToList();
+            //return View(items);
+
+            ViewData["Groups"] = _producers;    // передача списка групп(производителей) представлению
+            ViewData["CurrentGroup"] = group ?? 0;  // получить id ткекущей группы и поместить в TempData
+            //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));
+
+            var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
+
+            //lb6. 4.4.3
+            return View(ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize));
         }
 
         //инициализация данных в списках

@@ -1,0 +1,35 @@
+﻿@model Laptop
+
+<div class="card m-2 p-1 text-center col-5">
+    <img src="~/Images/@Model.Image" alt="NoImage" class="card-img-top" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.producer.ProducerName<br>@Model.Model</h5>
+        <p class="card-text">@Model.Processor</p>
+        <p class="card-text">RAM - @Model.RAM</p>
+        <p class="card-text">@Model.Graphics</p>
+        @if (string.IsNullOrEmpty(Model.SSD) != true)
+        {
+            <p class="card-text">SSD - @Model.SSD</p>
+        }
+        @if (string.IsNullOrEmpty(Model.HDD) != true)
+        {
+            <p class="card-text">HDD - @Model.HDD</p>
+        }
+
+        <div class="card-text badge badge-secondary">
+            <h6>@Model.Price $</h6>
+        </div>
+        @{
+            //получение текущего адреса
+            var request = ViewContext.HttpContext.Request;
+            var returnUrl = request.Path + request.QueryString.ToUriComponent();
+        }
+        <!--Разметка кнопки добавления в корзину-->
+        <p class="mt-2">
+            <a asp-action="Add" asp-controller="Cart" asp-route-id="@Model.LaptopId" asp-route-returnUrl="@returnUrl" class="btn btn-primary">
+                <i class="fa fa-shopping-cart"></i>
+                В корзину
+            </a>
+        </p>
+    </div>
+</div>
