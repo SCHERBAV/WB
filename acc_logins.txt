@@ -9,11 +9,11 @@
 	qwerty@mail.ru
 	123456
 
--with avatar
-	
 	qwer@mail.ru
 	qwer12
 
+-with avatar
+	
 	abcd@mail.ru
 	abcdef
 

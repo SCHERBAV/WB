@@ -51,7 +51,7 @@ namespace WebPrj.Controllers
             //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));
 
             var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
-
+            
             //lb6. 4.4.3
             return View(ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize));
         }

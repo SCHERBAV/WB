@@ -32,11 +32,18 @@
         <div class="card-deck">
             @foreach (var item in Model)
             {
-                <partial name="_ListItemPartial" model="@item"/>
+                <partial name="_ListItemPartial" model="@item" />
             }
+
+            @*<pager page-current="@Model.CurrentPage" page-total="@Model.TotalPages" action="Index" controller="Product" group-id="@currentGroup"></pager>*@
         </div>
     </div>
+
+    <div class="form-row text-center">
+        <pager page-current="@Model.CurrentPage" page-total="@Model.TotalPages" action="Index" controller="Product" group-id="@currentGroup"></pager>
+    </div>
 </div>
+
 
 
 <!--Разметка таблицы товаров-->
