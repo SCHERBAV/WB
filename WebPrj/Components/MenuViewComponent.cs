@@ -7,7 +7,7 @@ namespace WebPrj.Components
     public class MenuViewComponent : ViewComponent
     {
         private List<MenuItem> listMenuItems = new List<MenuItem>(){
-            new MenuItem(){ NameController="Action", Action="Index", Text="Lab 3" },
+            new MenuItem(){ NameController="Action", Action="Index", Text="Lab_7" },
             new MenuItem(){ NameController="Product", Action="Index", Text="Каталог" },
             new MenuItem(){ IsRazorPageOrControllerMethod=true, NameArea="Admin", NamePage="/Index", Text="Администрирование"},
         };

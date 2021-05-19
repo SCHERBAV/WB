@@ -7,6 +7,9 @@ using WebPrj.DAL.Entities;
 //lb6.
 using System.Linq;
 
+//lb7
+using WebPrj.Extensions;
+
 namespace WebPrj.Controllers
 {
     public class ProductController : Controller
@@ -35,6 +38,11 @@ namespace WebPrj.Controllers
         //    return View(_laptops);
         //}
 
+
+        //lb7. 4.6
+        [Route("Catalog")]
+        [Route("Catalog/Page_{pageNo}")]
+
         //lb6.
         //public IActionResult Index(int pageNo = 1)
         //lb6. 4.6.2
@@ -51,9 +59,17 @@ namespace WebPrj.Controllers
             //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));
 
             var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
-            
+
             //lb6. 4.4.3
-            return View(ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize));
+            //return View(ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize));
+
+            //lb7. 4.3.3
+            // асинхронный запрос
+            var model = ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize);
+            //if (Request.Headers["x-requested-with"].ToString().ToLower().Equals("xmlhttprequest")) return PartialView("_listpartial", model);
+            if(Request.IsAjaxRequest()) return PartialView("_listpartial", model);
+            else return View(model);
+            
         }
 
         //инициализация данных в списках
