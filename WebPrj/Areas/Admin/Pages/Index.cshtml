@@ -1,0 +1,94 @@
+﻿@page
+@model WebPrj.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Администрирование";
+}
+
+<h1>Администрирование</h1>
+
+<p class="mt-2">
+    <a asp-page="Create" class="btn btn-outline-info">
+        <span class="fa fa-plus-circle">Добавить</span>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].Processor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].RAM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].Graphics)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].HDD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].SSD)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Laptop[0].Image)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Laptop[0].ProducerId)
+            </th>
+            <th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Laptop) {
+        <tr>
+            <td>
+                <img src="~/Images/@item.Image" alt="NoImage" width="50">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Processor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Graphics)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HDD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSD)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProducerId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.LaptopId" class="btn btn-outline-info">
+                    <span class="fas fa-edit"></span>
+                </a> |
+                @*<a asp-page="./Details" asp-route-id="@item.LaptopId">Details</a> |*@
+                <a asp-page="./Delete" asp-route-id="@item.LaptopId" class="btn btn-outline-danger">
+                    <span class="fas fa-trash-alt"></span>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

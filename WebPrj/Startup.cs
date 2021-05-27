@@ -9,6 +9,10 @@ using WebPrj.DAL.Data;
 using WebPrj.DAL.Entities;
 using WebPrj.Services;
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using WebPrj.Models;
+
 namespace WebPrj
 {
     //класс Startup является входной точкой в приложение ASP.NET CORE
@@ -29,10 +33,10 @@ namespace WebPrj
         //С помощью методов расширений этого объекта производится конфигурация приложения для использования сервисов.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))) ;
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-           
+
             services.AddControllersWithViews();
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -50,6 +54,15 @@ namespace WebPrj
 
             //lb4. Для использования Razor страниц
             services.AddRazorPages();
+
+            //lb8. Для использования сессий в проекте
+            services.AddDistributedMemoryCache();
+            services.AddSession(opt => { opt.Cookie.HttpOnly = true; opt.Cookie.IsEssential = true; });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +92,9 @@ namespace WebPrj
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //lb8.
+            app.UseSession();
 
             DbInitializer.Seed(context, userManager, roleManager).GetAwaiter().GetResult();
 

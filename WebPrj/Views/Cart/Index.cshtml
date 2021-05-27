@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<WebPrj.Models.CartItem>
+
+@{ 
+    ViewData["Tittle"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Корзина</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+         {
+            <tr>
+                <td>
+                    <img src="~/Images/@item.laptop.Image" alt="No image" width="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.laptop.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-controller="Cart" asp-action="Delete" asp-route-id="@item.laptop.LaptopId" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>
+

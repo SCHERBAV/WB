@@ -1,0 +1,77 @@
+﻿@page
+@model WebPrj.Areas.Admin.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Laptop</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Laptop.Model" class="control-label"></label>
+                <input asp-for="Laptop.Model" class="form-control" />
+                <span asp-validation-for="Laptop.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.Processor" class="control-label"></label>
+                <input asp-for="Laptop.Processor" class="form-control" />
+                <span asp-validation-for="Laptop.Processor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.RAM" class="control-label"></label>
+                <input asp-for="Laptop.RAM" class="form-control" />
+                <span asp-validation-for="Laptop.RAM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.Graphics" class="control-label"></label>
+                <input asp-for="Laptop.Graphics" class="form-control" />
+                <span asp-validation-for="Laptop.Graphics" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.HDD" class="control-label"></label>
+                <input asp-for="Laptop.HDD" class="form-control" />
+                <span asp-validation-for="Laptop.HDD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.SSD" class="control-label"></label>
+                <input asp-for="Laptop.SSD" class="form-control" />
+                <span asp-validation-for="Laptop.SSD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.Image" class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="Image" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Выберите файл</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.Price" class="control-label"></label>
+                <input asp-for="Laptop.Price" class="form-control" />
+                <span asp-validation-for="Laptop.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Laptop.ProducerId" class="control-label"></label>
+                <input asp-for="Laptop.ProducerId" class="form-control" />
+                <span asp-validation-for="Laptop.ProducerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script src="~/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>bsCustomFileInput.init();</script>
+}

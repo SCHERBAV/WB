@@ -6,9 +6,14 @@ namespace WebPrj.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
 
+        public DbSet<Laptop> Laptops { get; set; }
+        public DbSet<Producer> Producers { get; set; }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {       
+        
         }
+            
     }
 }

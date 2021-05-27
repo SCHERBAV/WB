@@ -7,30 +7,45 @@ using WebPrj.DAL.Entities;
 //lb6.
 using System.Linq;
 
-//lb7
+//lb7.
 using WebPrj.Extensions;
+
+//lb8. Внедрение контекста БД в контроллер
+using WebPrj.DAL.Data;
 
 namespace WebPrj.Controllers
 {
     public class ProductController : Controller
     {
-        //List<Laptop> _laptops;  //список ноутбуков
-        List<Producer> _producers;  //список производителей
 
-        //lb6.
-        public List<Laptop> _laptops;  //список ноутбуков
-        
-
+        //lb8. 4.2
+        ApplicationDbContext _context;  //контекст БД
         //lb6.
         int _pageSize;  //количество объектов на странице
 
 
-        public ProductController() 
+        //List<Laptop> _laptops;  //список ноутбуков
+
+        //lb8. 4.2 Убрать поля
+        //List<Producer> _producers;  //список производителей
+
+        //lb6. Назначить поля
+        //lb8. 4.2 Убрать поля
+        //public List<Laptop> _laptops;  //список ноутбуков
+
+
+        //public ProductController() 
+        //lb8. 4.2.
+        public ProductController(ApplicationDbContext context)
         {
-            InitData(); //инициализация списков
+            //lb8. 4.2 Убрать вызов инициализации полей
+            //InitData(); //инициализация списков
 
             //lb6.
             _pageSize = 3;
+            //lb8. 4.2
+            _context = context;
+
         }
 
         //public IActionResult Index()
@@ -54,11 +69,14 @@ namespace WebPrj.Controllers
             //var items = _laptops.Skip((pageNo - 1) * _pageSize).Take(_pageSize).ToList();
             //return View(items);
 
-            ViewData["Groups"] = _producers;    // передача списка групп(производителей) представлению
+            //ViewData["Groups"] = _producers;    // передача списка групп(производителей) представлению
+            //lb8. 4.2
+            ViewData["Groups"] = _context.Producers;    // передача списка групп(производителей) представлению
             ViewData["CurrentGroup"] = group ?? 0;  // получить id ткекущей группы и поместить в TempData
             //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));
 
-            var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
+            //var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
+            var laptopsFiltered = _context.Laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
 
             //lb6. 4.4.3
             //return View(ListViewModel<Laptop>.GetModel(laptopsFiltered, pageNo, _pageSize));
@@ -75,7 +93,7 @@ namespace WebPrj.Controllers
         //инициализация данных в списках
         public void InitData() 
         {
-            _producers = new List<Producer>
+            /*_producers = new List<Producer>
             {
                 new Producer()
                 {
@@ -101,9 +119,9 @@ namespace WebPrj.Controllers
                     ProducerName = "Lenovo",
                     Country = "Китай"
                 },
-            };
+            };*/
 
-            _laptops = new List<Laptop>()
+            /*_laptops = new List<Laptop>()
             {
                 new Laptop()
                 {
@@ -184,7 +202,7 @@ namespace WebPrj.Controllers
                     ProducerId = 1,
                     producer = _producers[0]
                 }
-            };
+            };*/
         }
     }
 }

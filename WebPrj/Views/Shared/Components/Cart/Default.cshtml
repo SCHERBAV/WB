@@ -1,5 +1,11 @@
 ﻿<!--Cart Partial View-->
 
+@model Cart
+
+<a asp-controller="Cart" asp-action="Index" class="navbar-text ml-auto">
+    <i class="fas fa-shopping-cart nav-color"></i> (@Model.Count)
+</a>
+
 <html>
 
 <body>
