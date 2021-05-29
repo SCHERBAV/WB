@@ -8,7 +8,7 @@
 
     //lb6. 4.6.1
     var categories = ViewData["Groups"] as IEnumerable<Producer>;
-    int currentGroup = (int)ViewData["CurrentGroup"];
+    int currentGroup = (short)ViewData["CurrentGroup"];
     var text = currentGroup != 0 ? categories.FirstOrDefault(g => g.ProducerId == currentGroup)?.ProducerName : "Все";
 }
 

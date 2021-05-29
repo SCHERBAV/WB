@@ -1,17 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using WebPrj.Models;
-
-using WebPrj.DAL.Entities;
-
 //lb6.
 using System.Linq;
-
-//lb7.
-using WebPrj.Extensions;
-
+using WebPrj.Models;
+using WebPrj.DAL.Entities;
 //lb8. Внедрение контекста БД в контроллер
 using WebPrj.DAL.Data;
+//lb7.
+using WebPrj.Extensions;
+//lb9. Для применения логера
+using Microsoft.Extensions.Logging;
 
 namespace WebPrj.Controllers
 {
@@ -20,8 +17,12 @@ namespace WebPrj.Controllers
 
         //lb8. 4.2
         ApplicationDbContext _context;  //контекст БД
+
         //lb6.
         int _pageSize;  //количество объектов на странице
+
+        //lb9. 4.1.1 Применение логера
+        private ILogger _logger; 
 
 
         //List<Laptop> _laptops;  //список ноутбуков
@@ -36,7 +37,7 @@ namespace WebPrj.Controllers
 
         //public ProductController() 
         //lb8. 4.2.
-        public ProductController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context, ILogger<ProductController> logger)
         {
             //lb8. 4.2 Убрать вызов инициализации полей
             //InitData(); //инициализация списков
@@ -45,7 +46,8 @@ namespace WebPrj.Controllers
             _pageSize = 3;
             //lb8. 4.2
             _context = context;
-
+            //lb9 4.1.1
+            _logger = logger;
         }
 
         //public IActionResult Index()
@@ -61,8 +63,14 @@ namespace WebPrj.Controllers
         //lb6.
         //public IActionResult Index(int pageNo = 1)
         //lb6. 4.6.2
-        public IActionResult Index(int? group, int pageNo = 1)
+        //public IActionResult Index(int? group, int pageNo = 1)
+        public IActionResult Index(short? group, int pageNo)
         {
+            var groupName = group.HasValue ? _context.Producers.Find(group.Value)?.ProducerName : "all groups";
+
+            //lb9.
+            _logger.LogInformation($"info: group={groupName}, page={pageNo}");
+
             //Skip - Обходит указанное количество элементов в последовательности, а затем возвращает оставшиеся элементы.
             //Take - Возвращает указанное количество смежных элементов с начала последовательности.
 
@@ -73,8 +81,7 @@ namespace WebPrj.Controllers
             //lb8. 4.2
             ViewData["Groups"] = _context.Producers;    // передача списка групп(производителей) представлению
             ViewData["CurrentGroup"] = group ?? 0;  // получить id ткекущей группы и поместить в TempData
-            //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));
-
+                                                    //return View(ListViewModel<Laptop>.GetModel(_laptops, pageNo, _pageSize));          
             //var laptopsFiltered = _laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
             var laptopsFiltered = _context.Laptops.Where(l => !group.HasValue || l.ProducerId == group.Value);
 

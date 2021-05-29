@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using WebPrj.Models;
 
+//lb9
+using Microsoft.Extensions.Logging;
+using WebPrj.Extensions;    //дл€ метода расширени€ класса IApplicationBuilder
+
 namespace WebPrj
 {
     //класс Startup €вл€етс€ входной точкой в приложение ASP.NET CORE
@@ -67,8 +71,11 @@ namespace WebPrj
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //ћетод Configure устанавливает, как приложение будет обрабатывать запрос. Ётот метод €вл€етс€ об€зательным.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ILoggerFactory logger)
         {
+            //lb9. 4.1 ѕодключение логера
+            logger.AddFile("Logs/log-{Date}.txt");
+
             // если приложение в процессе разработки
             if (env.IsDevelopment())
             {
@@ -97,6 +104,9 @@ namespace WebPrj
             app.UseSession();
 
             DbInitializer.Seed(context, userManager, roleManager).GetAwaiter().GetResult();
+
+            //lb9.
+            app.UseFileLogging();
 
 
             //устанавливаем адреса, которые будут обрабатыватьс€

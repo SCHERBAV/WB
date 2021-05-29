@@ -22,6 +22,6 @@ namespace WebPrj
                                 //Метод webBuilder.UseStartup<Startup>() устанавливает класс Startup в качестве стартового.
                                 //И при запуске приложения среда ASP.NET будет искать в сборке приложения класс с именем Startup и загружать его.
                                 webBuilder.UseStartup<Startup>();
-                            });
+                            }).ConfigureLogging(lp => { lp.ClearProviders(); lp.AddFilter("Microsoft", LogLevel.None); });  //lb9. Указание фильтра логирования
     }
 }
